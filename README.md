@@ -4,7 +4,6 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-2.1+-150458.svg?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![Plotly](https://img.shields.io/badge/Plotly-5.18+-3F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white)](https://plotly.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg?style=for-the-badge)](LICENSE)
 
 **Scrubb AI** is an end-to-end, privacy-conscious data profiling, exploratory data analysis (EDA), and automated data cleaning platform built with Streamlit and OpenRouter LLMs. It empowers data scientists, analysts, and engineers to diagnose data quality issues, interactively clean messy datasets, receive AI-driven remediation roadmaps, and generate production-ready reproducible transformation scripts in seconds.
 
@@ -149,8 +148,3 @@ Contributions, issues, and feature requests are welcome!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
