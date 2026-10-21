@@ -1,0 +1,40 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Databases (User accounts and data)
+*.db
+*.sqlite
+*.sqlite3
+users.db
+
+# Secrets & Environment Variables
+.env
+.env.local
+.env.*.local
+.streamlit/secrets.toml
+!.env.example
+!.streamlit/secrets.toml.example
+
+# Environments & Virtual Envs
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Streamlit logs & cache
+.streamlit/*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
