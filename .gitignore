@@ -14,8 +14,6 @@ users.db
 .env.local
 .env.*.local
 .streamlit/secrets.toml
-!.env.example
-!.streamlit/secrets.toml.example
 
 # Environments & Virtual Envs
 .venv/
