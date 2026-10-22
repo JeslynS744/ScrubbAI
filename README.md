@@ -87,25 +87,25 @@ pip install -r requirements.txt
 ```
 
 ### 4. Configure Your API Key
+You can configure your OpenRouter API key using either Streamlit Secrets or Environment Variables:
 
-#### On Streamlit Community Cloud (Deployment)
-1. Go to your app's dashboard on [share.streamlit.io](https://share.streamlit.io/).
-2. Click **Settings** (⚙️) > **Secrets**.
-3. Add your key in the secrets editor:
+#### Option A: Streamlit Secrets (Recommended for local development)
+1. Copy the example secrets file:
+   ```bash
+   cp .streamlit/secrets.toml.example .streamlit/secrets.toml
+   ```
+2. Open `.streamlit/secrets.toml` and set your key:
    ```toml
    OPENROUTER_API_KEY = "your_openrouter_api_key_here"
    ```
-4. Save and restart the app.
 
-#### For Local Development
-Create `.streamlit/secrets.toml` (ignored by Git) and add:
-```toml
-OPENROUTER_API_KEY = "your_openrouter_api_key_here"
-```
-Or set it as an environment variable:
+#### Option B: Environment Variable
 ```bash
-# Windows PowerShell: $env:OPENROUTER_API_KEY="your_key"
-# Linux / macOS: export OPENROUTER_API_KEY="your_key"
+# Windows PowerShell
+$env:OPENROUTER_API_KEY="your_openrouter_api_key_here"
+
+# Linux / macOS
+export OPENROUTER_API_KEY="your_openrouter_api_key_here"
 ```
 
 ### 5. Run the Application
@@ -120,10 +120,13 @@ Open your browser and navigate to `http://localhost:8501`.
 
 ```text
 ScrubbAI/
-├── app.py            # Complete Streamlit application and backend logic
-├── requirements.txt  # Python package dependencies for Streamlit Cloud
-├── .gitignore        # Excludes local databases, secrets, and cache
-└── README.md         # Project documentation and setup guide
+├── .streamlit/
+│   ├── secrets.toml.example  # Example Streamlit configuration template
+├── .env.example              # Example environment variable template
+├── .gitignore                # Git ignore configuration (protects keys and DB)
+├── app.py                    # Main Streamlit application and backend logic
+├── requirements.txt          # Python package dependencies
+└── README.md                 # Project documentation and setup guide
 ```
 
 ---
