@@ -335,6 +335,7 @@ div[data-testid="stForm"] {
 .st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type {
   display: flex !important;
   align-items: center !important;
+  justify-content: space-between !important;
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -348,10 +349,10 @@ div[data-testid="stForm"] {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  margin-right: 1.8rem !important;
+  margin-right: 1.5rem !important;
 }
 
-/* Top-Level Column 2: Navigation Links (Overview, Explore, AI Analyst, Export) - hugs content */
+/* Top-Level Column 2: Navigation Links (Overview, Explore, AI Analyst) - hugs content */
 .st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(2) {
   flex: 0 0 auto !important;
   width: auto !important;
@@ -379,7 +380,7 @@ div[data-testid="stForm"] {
   margin: 0 !important;
 }
 
-/* Top-Level Column 3: Profile - pushed to top right corner next to Sign out */
+/* Top-Level Column 3: Right Cluster Container (pushed to the right corner) */
 .st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) {
   flex: 0 0 auto !important;
   width: auto !important;
@@ -388,31 +389,73 @@ div[data-testid="stForm"] {
   align-items: center !important;
   justify-content: flex-end !important;
   margin-left: auto !important;
-  margin-right: 0.49rem !important;
   padding: 0 !important;
 }
 
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) .element-container,
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"],
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"] > p {
+/* Dedicated Flex Container for Right-Side Items (Export, Profile, Sign out) */
+.nav-right-cluster,
+.st-key-nav_right_cluster {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
   width: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
 }
 
-/* Top-Level Column 4: Sign out button - anchored at the far right corner next to Profile */
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(4) {
+.st-key-nav_right_cluster > div:first-child,
+.st-key-nav_right_cluster div[data-testid="stHorizontalBlock"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 360px !important; /* Explicit width ensuring precise equidistant distribution */
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  gap: 0.75rem !important;
+}
+
+/* Cluster Sub-Column 1: Export tab */
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(1) {
   flex: 0 0 auto !important;
   width: auto !important;
-  min-width: fit-content !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+/* Cluster Sub-Column 2: User Profile (positioned precisely halfway between Export and Sign out) */
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) .element-container,
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) [data-testid="stMarkdownContainer"],
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) [data-testid="stMarkdownContainer"] > p {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* Cluster Sub-Column 3: Sign out button */
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(3) {
+  flex: 0 0 auto !important;
+  width: auto !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
-  margin-left: 0 !important;
 }
 
 .st-key-top_navbar .element-container,
@@ -1625,7 +1668,7 @@ def render_dashboard() -> None:
 
     # ---------- Edge-to-Edge Sticky Top Navigation Bar ----------
     with st.container(key="top_navbar"):
-        col_brand, col_nav, col_profile, col_logout = st.columns([1.2, 5.2, 1.8, 1.1], vertical_alignment="center")
+        col_brand, col_nav, col_right = st.columns([1.3, 3.8, 4.4], vertical_alignment="center")
 
         with col_brand:
             st.markdown(
@@ -1639,12 +1682,11 @@ def render_dashboard() -> None:
             )
 
         with col_nav:
-            nav_c1, nav_c2, nav_c3, nav_c4 = st.columns(4)
+            nav_c1, nav_c2, nav_c3 = st.columns(3)
             nav_buttons = [
                 (nav_c1, "📊 Overview", "btn_nav_overview"),
                 (nav_c2, "🔍 Explore (EDA)", "btn_nav_eda"),
                 (nav_c3, "🤖 AI Analyst", "btn_nav_ai"),
-                (nav_c4, "💾 Export", "btn_nav_export"),
             ]
             for col_btn, label, btn_key in nav_buttons:
                 is_active = (st.session_state["active_nav"] == label)
@@ -1652,23 +1694,33 @@ def render_dashboard() -> None:
                     st.session_state["active_nav"] = label
                     st.rerun()
 
-        with col_profile:
-            username_display = st.session_state.get("username", "User") or "User"
-            st.markdown(
-                f"""
-                <div class="nav-profile-group">
-                    <div class="user-avatar-circle">👤</div>
-                    <span class="user-display-name">{username_display}</span>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+        with col_right:
+            with st.container(key="nav_right_cluster"):
+                c_export, c_profile, c_logout = st.columns([1.1, 1.4, 1.1], vertical_alignment="center")
 
-        with col_logout:
-            if st.button("🚪 Sign out", use_container_width=True, key="top_sign_out_button"):
-                for key in ["authenticated", "username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "clean_log", "target_column", "ai_cleaning_completed", "active_nav"]:
-                    st.session_state[key] = False if key in ["authenticated", "ai_cleaning_completed"] else (None if key in ["username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "target_column"] else ("📊 Overview" if "nav" in key else []))
-                st.rerun()
+                with c_export:
+                    is_export_active = (st.session_state["active_nav"] == "💾 Export")
+                    if st.button("💾 Export", key="btn_nav_export", use_container_width=True, type="primary" if is_export_active else "secondary"):
+                        st.session_state["active_nav"] = "💾 Export"
+                        st.rerun()
+
+                with c_profile:
+                    username_display = st.session_state.get("username", "User") or "User"
+                    st.markdown(
+                        f"""
+                        <div class="nav-profile-group">
+                            <div class="user-avatar-circle">👤</div>
+                            <span class="user-display-name">{username_display}</span>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+
+                with c_logout:
+                    if st.button("🚪 Sign out", use_container_width=True, key="top_sign_out_button"):
+                        for key in ["authenticated", "username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "clean_log", "target_column", "ai_cleaning_completed", "active_nav"]:
+                            st.session_state[key] = False if key in ["authenticated", "ai_cleaning_completed"] else (None if key in ["username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "target_column"] else ("📊 Overview" if "nav" in key else []))
+                        st.rerun()
 
     # --- Main Workspace Area ---
     st.markdown("""
