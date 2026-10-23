@@ -388,7 +388,7 @@ div[data-testid="stForm"] {
   align-items: center !important;
   justify-content: flex-end !important;
   margin-left: auto !important;
-  margin-right: 0.9rem !important;
+  margin-right: 0.19rem !important;
   padding: 0 !important;
 }
 
