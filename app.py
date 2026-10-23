@@ -116,7 +116,7 @@ section[data-testid="stSidebar"] {
 }
 
 .block-container {
-  padding-top: 3.5rem !important;
+  padding-top: 5.5rem !important;
   padding-bottom: 3.5rem !important;
   max-width: 1560px;
 }
@@ -294,27 +294,29 @@ div[data-testid="stForm"] {
   box-shadow: 0 6px 20px rgba(15, 14, 71, 0.3) !important;
 }
 
-/* Sticky Top Navigation Bar */
+/* Edge-to-Edge Sticky Top Navigation Bar */
 .st-key-top_navbar {
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
-  z-index: 9999 !important;
-  background: rgba(39, 39, 87, 0.98) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  z-index: 99999 !important;
+  background: rgba(22, 21, 74, 0.98) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
   border-bottom: 1.5px solid #505081 !important;
-  border-radius: 0 0 16px 16px !important;
-  padding: 0.55rem 1.15rem !important;
-  margin-top: -3.5rem !important;
-  margin-bottom: 1.5rem !important;
-  box-shadow: 0 8px 30px rgba(15, 14, 71, 0.5) !important;
+  border-radius: 0 !important;
+  padding: 0.65rem 2.5rem !important;
+  margin: 0 !important;
+  box-shadow: 0 4px 24px rgba(15, 14, 71, 0.5) !important;
+  box-sizing: border-box !important;
 }
 
 .top-nav-brand {
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  padding-left: 0.25rem;
 }
 
 .top-nav-brand .brand-icon {
@@ -329,40 +331,113 @@ div[data-testid="stForm"] {
   white-space: nowrap;
 }
 
-.top-nav-user-pill {
+/* Top Nav Link Buttons (Clean website navigation pills) */
+.st-key-top_navbar .stButton button {
+  border-radius: 999px !important;
+  font-size: 0.88rem !important;
+  font-weight: 650 !important;
+  padding: 0.42rem 0.75rem !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  color: #D8D8F0 !important;
+  box-shadow: none !important;
+  transition: all 0.18s ease !important;
+  white-space: nowrap !important;
+}
+
+.st-key-top_navbar .stButton button *,
+.st-key-top_navbar .stButton button p,
+.st-key-top_navbar .stButton button span {
+  color: #D8D8F0 !important;
+  font-weight: 650 !important;
+}
+
+.st-key-top_navbar .stButton button:hover {
+  background: rgba(80, 80, 129, 0.35) !important;
+  border-color: #505081 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
+}
+
+.st-key-top_navbar .stButton button:hover *,
+.st-key-top_navbar .stButton button:hover p,
+.st-key-top_navbar .stButton button:hover span {
+  color: #FFFFFF !important;
+}
+
+.st-key-top_navbar .stButton button[kind="primary"] {
+  background: linear-gradient(135deg, #505081 0%, #6C6CD6 100%) !important;
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+  border: 1px solid #8686AC !important;
+  box-shadow: 0 2px 10px rgba(108, 108, 214, 0.4) !important;
+}
+
+.st-key-top_navbar .stButton button[kind="primary"] *,
+.st-key-top_navbar .stButton button[kind="primary"] p,
+.st-key-top_navbar .stButton button[kind="primary"] span {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+/* User Profile: Circular badge, no box container, pure white username */
+.nav-profile-group {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  background: #1C1B5E;
-  border: 1px solid #505081;
-  border-radius: 10px;
-  padding: 0.35rem 0.75rem;
+  gap: 0.65rem;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
-.top-nav-user-pill .user-avatar {
-  font-size: 1.15rem;
-}
-
-.top-nav-user-pill .user-meta {
+.user-avatar-circle {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: #505081;
+  border: 1.5px solid #8686AC;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(15, 14, 71, 0.35);
 }
 
-.top-nav-user-pill .user-name {
+.user-display-name {
   color: #FFFFFF !important;
-  font-size: 0.88rem;
-  font-weight: 750;
-  line-height: 1.1;
+  font-weight: 700;
+  font-size: 0.92rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 140px;
+  max-width: 130px;
+  line-height: 1.2;
 }
 
-.top-nav-user-pill .user-status {
-  color: #8686AC !important;
-  font-size: 0.7rem;
-  font-weight: 600;
+/* Sign Out button styling inside top nav */
+.st-key-top_sign_out_button button {
+  background: rgba(80, 80, 129, 0.25) !important;
+  color: #FFFFFF !important;
+  border: 1px solid #505081 !important;
+  border-radius: 10px !important;
+  padding: 0.42rem 0.9rem !important;
+  font-size: 0.84rem !important;
+  font-weight: 650 !important;
+  transition: all 0.18s ease !important;
+}
+
+.st-key-top_sign_out_button button *,
+.st-key-top_sign_out_button button p,
+.st-key-top_sign_out_button button span {
+  color: #FFFFFF !important;
+}
+
+.st-key-top_sign_out_button button:hover {
+  background: rgba(225, 29, 72, 0.3) !important;
+  border-color: rgba(225, 29, 72, 0.65) !important;
+  color: #FFFFFF !important;
 }
 
 /* Horizontal Radio / Pill Options */
@@ -751,7 +826,6 @@ for key, default in {
     "target_column": "(Not specified)",
     "ai_cleaning_completed": False,
     "active_nav": "📊 Overview",
-    "top_nav_key": "📊 Overview",
 }.items():
     if key not in st.session_state:
         st.session_state[key] = default
@@ -1371,15 +1445,10 @@ def render_dashboard() -> None:
     # Initialize navigation state
     if "active_nav" not in st.session_state:
         st.session_state["active_nav"] = NAV_SECTIONS[0]
-    if "top_nav_key" not in st.session_state or st.session_state["top_nav_key"] not in NAV_SECTIONS:
-        st.session_state["top_nav_key"] = st.session_state["active_nav"]
 
-    def _sync_nav():
-        st.session_state["active_nav"] = st.session_state["top_nav_key"]
-
-    # ---------- Sticky Top Navigation Bar ----------
+    # ---------- Edge-to-Edge Sticky Top Navigation Bar ----------
     with st.container(key="top_navbar"):
-        col_brand, col_nav, col_user, col_logout = st.columns([1.5, 4.3, 1.8, 1.1], vertical_alignment="center")
+        col_brand, col_nav, col_profile, col_logout = st.columns([1.5, 4.4, 1.8, 1.1], vertical_alignment="center")
 
         with col_brand:
             st.markdown(
@@ -1393,25 +1462,26 @@ def render_dashboard() -> None:
             )
 
         with col_nav:
-            st.radio(
-                "Workspace Navigation",
-                options=NAV_SECTIONS,
-                key="top_nav_key",
-                on_change=_sync_nav,
-                horizontal=True,
-                label_visibility="collapsed",
-            )
+            nav_c1, nav_c2, nav_c3, nav_c4 = st.columns(4)
+            nav_buttons = [
+                (nav_c1, "📊 Overview", "btn_nav_overview"),
+                (nav_c2, "🔍 Explore (EDA)", "btn_nav_eda"),
+                (nav_c3, "🤖 AI Analyst", "btn_nav_ai"),
+                (nav_c4, "💾 Export", "btn_nav_export"),
+            ]
+            for col_btn, label, btn_key in nav_buttons:
+                is_active = (st.session_state["active_nav"] == label)
+                if col_btn.button(label, key=btn_key, use_container_width=True, type="primary" if is_active else "secondary"):
+                    st.session_state["active_nav"] = label
+                    st.rerun()
 
-        with col_user:
+        with col_profile:
             username_display = st.session_state.get("username", "User") or "User"
             st.markdown(
                 f"""
-                <div class="top-nav-user-pill">
-                    <span class="user-avatar">👤</span>
-                    <div class="user-meta">
-                        <span class="user-name">{username_display}</span>
-                        <span class="user-status">Active Session</span>
-                    </div>
+                <div class="nav-profile-group">
+                    <div class="user-avatar-circle">👤</div>
+                    <span class="user-display-name">{username_display}</span>
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -1419,7 +1489,7 @@ def render_dashboard() -> None:
 
         with col_logout:
             if st.button("🚪 Sign out", use_container_width=True, key="top_sign_out_button"):
-                for key in ["authenticated", "username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "clean_log", "target_column", "ai_cleaning_completed", "active_nav", "top_nav_key"]:
+                for key in ["authenticated", "username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "clean_log", "target_column", "ai_cleaning_completed", "active_nav"]:
                     st.session_state[key] = False if key in ["authenticated", "ai_cleaning_completed"] else (None if key in ["username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "target_column"] else ("📊 Overview" if "nav" in key else []))
                 st.rerun()
 
