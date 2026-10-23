@@ -379,34 +379,8 @@ div[data-testid="stForm"] {
   margin: 0 !important;
 }
 
-/* Top-Level Column 3: Profile - occupies 100% of the horizontal space between Export and Sign out */
+/* Top-Level Column 3: Profile - pushed to top right corner next to Sign out */
 .st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) {
-  flex: 1 1 auto !important;
-  width: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  margin: 0 !important;
-  padding: 0 1rem !important;
-}
-
-/* Center all wrappers inside Column 3 for dead-center equidistant alignment */
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) .element-container,
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"],
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"] > p {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  text-align: center !important;
-}
-
-/* Top-Level Column 4: Sign out button - anchored at the right end of the navbar */
-.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(4) {
   flex: 0 0 auto !important;
   width: auto !important;
   min-width: fit-content !important;
@@ -414,6 +388,31 @@ div[data-testid="stForm"] {
   align-items: center !important;
   justify-content: flex-end !important;
   margin-left: auto !important;
+  margin-right: 0.9rem !important;
+  padding: 0 !important;
+}
+
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) .element-container,
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"],
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"] > p {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Top-Level Column 4: Sign out button - anchored at the far right corner next to Profile */
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(4) {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: fit-content !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  margin-left: 0 !important;
 }
 
 .st-key-top_navbar .element-container,
@@ -541,7 +540,7 @@ div[data-testid="stForm"] {
   padding: 0 !important;
   height: 38px !important;
   line-height: 1 !important;
-  margin: 0 auto !important;
+  margin: 0 !important;
 }
 
 .user-avatar-circle {
@@ -1626,7 +1625,7 @@ def render_dashboard() -> None:
 
     # ---------- Edge-to-Edge Sticky Top Navigation Bar ----------
     with st.container(key="top_navbar"):
-        col_brand, col_nav, col_profile, col_logout = st.columns([1.2, 4.0, 4.0, 1.0], vertical_alignment="center")
+        col_brand, col_nav, col_profile, col_logout = st.columns([1.2, 5.2, 1.8, 1.1], vertical_alignment="center")
 
         with col_brand:
             st.markdown(
