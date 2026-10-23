@@ -295,6 +295,13 @@ div[data-testid="stForm"] {
 }
 
 /* Edge-to-Edge Sticky Top Navigation Bar */
+.topnav-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
 .st-key-top_navbar {
   position: fixed !important;
   top: 0 !important;
@@ -313,36 +320,128 @@ div[data-testid="stForm"] {
   box-sizing: border-box !important;
 }
 
+.topnav-container,
+.st-key-top_navbar > div:first-child,
+.st-key-top_navbar div[data-testid="stHorizontalBlock"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.st-key-top_navbar div[data-testid="column"] {
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+}
+
+.st-key-top_navbar div[data-testid="column"]:first-child {
+  justify-content: flex-start !important;
+}
+
+/* Ensure sub-columns in col_nav align on center axis */
+.st-key-top_navbar div[data-testid="column"]:nth-child(2) div[data-testid="stHorizontalBlock"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Center profile column evenly between Export and Sign out */
+.st-key-top_navbar div[data-testid="column"]:nth-child(3) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* Align sign out column cleanly to the right */
+.st-key-top_navbar div[data-testid="column"]:nth-child(4) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+.st-key-top_navbar .element-container,
+.st-key-top_navbar [data-testid="stElementContainer"] {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.st-key-top_navbar [data-testid="stMarkdownContainer"],
+.st-key-top_navbar [data-testid="stMarkdownContainer"] > p {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  width: 100% !important;
+}
+
 .top-nav-brand {
-  display: flex;
-  align-items: center;
+  display: inline-flex !important;
+  align-items: center !important;
   gap: 0.55rem;
+  height: 38px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .top-nav-brand .brand-icon {
-  font-size: 1.6rem;
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
 }
 
 .top-nav-brand .brand-title {
   color: #FFFFFF !important;
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
+  font-weight: 800 !important;
+  font-size: 1.25rem !important;
+  letter-spacing: -0.02em !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
 }
 
 /* Top Nav Link Buttons (Clean website navigation pills) */
+.st-key-top_navbar .stButton {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
 .st-key-top_navbar .stButton button {
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   border-radius: 999px !important;
   font-size: 0.88rem !important;
   font-weight: 650 !important;
-  padding: 0.42rem 0.75rem !important;
+  padding: 0 0.85rem !important;
   border: 1px solid transparent !important;
   background: transparent !important;
   color: #D8D8F0 !important;
   box-shadow: none !important;
   transition: all 0.18s ease !important;
   white-space: nowrap !important;
+  margin: 0 !important;
+  width: 100% !important;
 }
 
 .st-key-top_navbar .stButton button *,
@@ -350,6 +449,8 @@ div[data-testid="stForm"] {
 .st-key-top_navbar .stButton button span {
   color: #D8D8F0 !important;
   font-weight: 650 !important;
+  line-height: 1 !important;
+  margin: 0 !important;
 }
 
 .st-key-top_navbar .stButton button:hover {
@@ -378,60 +479,90 @@ div[data-testid="stForm"] {
 .st-key-top_navbar .stButton button[kind="primary"] span {
   color: #FFFFFF !important;
   font-weight: 700 !important;
+  line-height: 1 !important;
 }
 
-/* User Profile: Circular badge, no box container, pure white username */
+/* User Profile: Centered vertically and horizontally, circular badge, no box container, pure white username */
 .nav-profile-group {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
+  height: 38px !important;
+  line-height: 1 !important;
+  margin: 0 auto !important;
 }
 
 .user-avatar-circle {
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
-  border-radius: 50%;
-  background: #505081;
-  border: 1.5px solid #8686AC;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  box-shadow: 0 2px 6px rgba(15, 14, 71, 0.35);
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  border-radius: 50% !important;
+  background: #505081 !important;
+  border: 1.5px solid #8686AC !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1rem !important;
+  line-height: 1 !important;
+  box-shadow: 0 2px 6px rgba(15, 14, 71, 0.35) !important;
+  margin: 0 !important;
 }
 
 .user-display-name {
   color: #FFFFFF !important;
-  font-weight: 700;
-  font-size: 0.92rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 130px;
-  line-height: 1.2;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 130px !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
 }
 
 /* Sign Out button styling inside top nav */
+.st-key-top_sign_out_button {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
+}
+
 .st-key-top_sign_out_button button {
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   background: rgba(80, 80, 129, 0.25) !important;
   color: #FFFFFF !important;
   border: 1px solid #505081 !important;
   border-radius: 10px !important;
-  padding: 0.42rem 0.9rem !important;
+  padding: 0 0.95rem !important;
   font-size: 0.84rem !important;
   font-weight: 650 !important;
   transition: all 0.18s ease !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  width: 100% !important;
 }
 
 .st-key-top_sign_out_button button *,
 .st-key-top_sign_out_button button p,
 .st-key-top_sign_out_button button span {
   color: #FFFFFF !important;
+  line-height: 1 !important;
+  margin: 0 !important;
 }
 
 .st-key-top_sign_out_button button:hover {
@@ -1448,7 +1579,7 @@ def render_dashboard() -> None:
 
     # ---------- Edge-to-Edge Sticky Top Navigation Bar ----------
     with st.container(key="top_navbar"):
-        col_brand, col_nav, col_profile, col_logout = st.columns([1.5, 4.4, 1.8, 1.1], vertical_alignment="center")
+        col_brand, col_nav, col_profile, col_logout = st.columns([1.4, 4.7, 1.35, 1.0], vertical_alignment="center")
 
         with col_brand:
             st.markdown(
