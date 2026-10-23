@@ -352,7 +352,7 @@ div[data-testid="stForm"] {
   margin-right: 1.5rem !important;
 }
 
-/* Top-Level Column 2: Navigation Links (Overview, Explore, AI Analyst) - hugs content */
+/* Top-Level Column 2: Navigation Links (Overview, Explore, AI Analyst, Export) - hugs content */
 .st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(2) {
   flex: 0 0 auto !important;
   width: auto !important;
@@ -362,7 +362,7 @@ div[data-testid="stForm"] {
   justify-content: flex-start !important;
 }
 
-/* Sub-columns container inside Column 2 */
+/* Sub-columns container inside Column 2 (Overview, Explore, AI Analyst, Export) */
 .st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(2) div[data-testid="stHorizontalBlock"] {
   display: flex !important;
   align-items: center !important;
@@ -392,7 +392,7 @@ div[data-testid="stForm"] {
   padding: 0 !important;
 }
 
-/* Dedicated Flex Container for Right-Side Items (Export, Profile, Sign out) */
+/* Dedicated Flex Container for Right-Side Items (Profile & Sign out) */
 .nav-right-cluster,
 .st-key-nav_right_cluster {
   display: flex !important;
@@ -407,50 +407,37 @@ div[data-testid="stForm"] {
 .st-key-nav_right_cluster div[data-testid="stHorizontalBlock"] {
   display: flex !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  width: 360px !important; /* Explicit width ensuring precise equidistant distribution */
-  max-width: 100% !important;
+  justify-content: flex-end !important;
+  width: auto !important;
   margin-left: auto !important;
   margin-right: 0 !important;
   padding: 0 !important;
-  gap: 0.75rem !important;
+  gap: 1rem !important;
 }
 
-/* Cluster Sub-Column 1: Export tab */
+/* Cluster Sub-Column 1: User Profile */
 .st-key-nav_right_cluster div[data-testid="column"]:nth-child(1) {
   flex: 0 0 auto !important;
   width: auto !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
+  justify-content: flex-end !important;
 }
 
-/* Cluster Sub-Column 2: User Profile (positioned precisely halfway between Export and Sign out) */
-.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) {
-  flex: 1 1 auto !important;
-  width: auto !important;
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(1) .element-container,
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(1) [data-testid="stElementContainer"],
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(1) [data-testid="stMarkdownContainer"],
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(1) [data-testid="stMarkdownContainer"] > p {
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  margin: 0 auto !important;
-}
-
-.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) .element-container,
-.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
-.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) [data-testid="stMarkdownContainer"],
-.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) [data-testid="stMarkdownContainer"] > p {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin: 0 auto !important;
+  justify-content: flex-end !important;
+  margin: 0 !important;
   padding: 0 !important;
-  text-align: center !important;
-  width: 100% !important;
+  width: auto !important;
 }
 
-/* Cluster Sub-Column 3: Sign out button */
-.st-key-nav_right_cluster div[data-testid="column"]:nth-child(3) {
+/* Cluster Sub-Column 2: Sign out button */
+.st-key-nav_right_cluster div[data-testid="column"]:nth-child(2) {
   flex: 0 0 auto !important;
   width: auto !important;
   display: flex !important;
@@ -1668,7 +1655,7 @@ def render_dashboard() -> None:
 
     # ---------- Edge-to-Edge Sticky Top Navigation Bar ----------
     with st.container(key="top_navbar"):
-        col_brand, col_nav, col_right = st.columns([1.3, 3.8, 4.4], vertical_alignment="center")
+        col_brand, col_nav, col_right = st.columns([1.3, 5.0, 3.2], vertical_alignment="center")
 
         with col_brand:
             st.markdown(
@@ -1682,11 +1669,12 @@ def render_dashboard() -> None:
             )
 
         with col_nav:
-            nav_c1, nav_c2, nav_c3 = st.columns(3)
+            nav_c1, nav_c2, nav_c3, nav_c4 = st.columns(4)
             nav_buttons = [
                 (nav_c1, "📊 Overview", "btn_nav_overview"),
                 (nav_c2, "🔍 Explore (EDA)", "btn_nav_eda"),
                 (nav_c3, "🤖 AI Analyst", "btn_nav_ai"),
+                (nav_c4, "💾 Export", "btn_nav_export"),
             ]
             for col_btn, label, btn_key in nav_buttons:
                 is_active = (st.session_state["active_nav"] == label)
@@ -1696,13 +1684,7 @@ def render_dashboard() -> None:
 
         with col_right:
             with st.container(key="nav_right_cluster"):
-                c_export, c_profile, c_logout = st.columns([1.1, 1.4, 1.1], vertical_alignment="center")
-
-                with c_export:
-                    is_export_active = (st.session_state["active_nav"] == "💾 Export")
-                    if st.button("💾 Export", key="btn_nav_export", use_container_width=True, type="primary" if is_export_active else "secondary"):
-                        st.session_state["active_nav"] = "💾 Export"
-                        st.rerun()
+                c_profile, c_logout = st.columns([1.3, 1.0], vertical_alignment="center")
 
                 with c_profile:
                     username_display = st.session_state.get("username", "User") or "User"
