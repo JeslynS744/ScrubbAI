@@ -325,46 +325,95 @@ div[data-testid="stForm"] {
 .st-key-top_navbar div[data-testid="stHorizontalBlock"] {
   display: flex !important;
   align-items: center !important;
-  justify-content: space-between !important;
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
-.st-key-top_navbar div[data-testid="column"] {
+/* Top-level Horizontal Block: Precise Flex Layout */
+.st-key-top_navbar > div > div[data-testid="stHorizontalBlock"],
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type {
   display: flex !important;
   align-items: center !important;
+  width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  height: 100% !important;
 }
 
-.st-key-top_navbar div[data-testid="column"]:first-child {
+/* Top-Level Column 1: Brand (hugs content on the left) */
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(1) {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: fit-content !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin-right: 1.8rem !important;
+}
+
+/* Top-Level Column 2: Navigation Links (Overview, Explore, AI Analyst, Export) - hugs content */
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(2) {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: fit-content !important;
+  display: flex !important;
+  align-items: center !important;
   justify-content: flex-start !important;
 }
 
-/* Ensure sub-columns in col_nav align on center axis */
-.st-key-top_navbar div[data-testid="column"]:nth-child(2) div[data-testid="stHorizontalBlock"] {
+/* Sub-columns container inside Column 2 */
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(2) div[data-testid="stHorizontalBlock"] {
   display: flex !important;
   align-items: center !important;
   gap: 0.5rem !important;
-  width: 100% !important;
+  width: auto !important;
   margin: 0 !important;
 }
 
-/* Center profile column evenly between Export and Sign out */
-.st-key-top_navbar div[data-testid="column"]:nth-child(3) {
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(2) div[data-testid="column"] {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: fit-content !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
+/* Top-Level Column 3: Profile - occupies 100% of the horizontal space between Export and Sign out */
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) {
+  flex: 1 1 auto !important;
+  width: auto !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
+  margin: 0 !important;
+  padding: 0 1rem !important;
 }
 
-/* Align sign out column cleanly to the right */
-.st-key-top_navbar div[data-testid="column"]:nth-child(4) {
+/* Center all wrappers inside Column 3 for dead-center equidistant alignment */
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) .element-container,
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"],
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(3) [data-testid="stMarkdownContainer"] > p {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* Top-Level Column 4: Sign out button - anchored at the right end of the navbar */
+.st-key-top_navbar div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"]:nth-child(4) {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: fit-content !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
+  margin-left: auto !important;
 }
 
 .st-key-top_navbar .element-container,
@@ -373,7 +422,6 @@ div[data-testid="stForm"] {
   padding: 0 !important;
   display: flex !important;
   align-items: center !important;
-  width: 100% !important;
 }
 
 .st-key-top_navbar [data-testid="stMarkdownContainer"],
@@ -383,7 +431,6 @@ div[data-testid="stForm"] {
   display: flex !important;
   align-items: center !important;
   line-height: 1 !important;
-  width: 100% !important;
 }
 
 .top-nav-brand {
@@ -419,7 +466,7 @@ div[data-testid="stForm"] {
   margin: 0 !important;
   display: flex !important;
   align-items: center !important;
-  width: 100% !important;
+  width: auto !important;
 }
 
 .st-key-top_navbar .stButton button {
@@ -441,7 +488,7 @@ div[data-testid="stForm"] {
   transition: all 0.18s ease !important;
   white-space: nowrap !important;
   margin: 0 !important;
-  width: 100% !important;
+  width: auto !important;
 }
 
 .st-key-top_navbar .stButton button *,
@@ -533,7 +580,7 @@ div[data-testid="stForm"] {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
-  width: 100% !important;
+  width: auto !important;
 }
 
 .st-key-top_sign_out_button button {
@@ -554,7 +601,7 @@ div[data-testid="stForm"] {
   transition: all 0.18s ease !important;
   margin: 0 !important;
   white-space: nowrap !important;
-  width: 100% !important;
+  width: auto !important;
 }
 
 .st-key-top_sign_out_button button *,
@@ -1579,7 +1626,7 @@ def render_dashboard() -> None:
 
     # ---------- Edge-to-Edge Sticky Top Navigation Bar ----------
     with st.container(key="top_navbar"):
-        col_brand, col_nav, col_profile, col_logout = st.columns([1.4, 4.7, 1.35, 1.0], vertical_alignment="center")
+        col_brand, col_nav, col_profile, col_logout = st.columns([1.2, 4.0, 4.0, 1.0], vertical_alignment="center")
 
         with col_brand:
             st.markdown(
