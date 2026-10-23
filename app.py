@@ -1699,7 +1699,7 @@ def render_dashboard() -> None:
                     )
 
                 with c_logout:
-                    if st.button("🚪 Sign out", use_container_width=True, key="top_sign_out_button"):
+                    if st.button(" Sign out", use_container_width=True, key="top_sign_out_button"):
                         for key in ["authenticated", "username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "clean_log", "target_column", "ai_cleaning_completed", "active_nav"]:
                             st.session_state[key] = False if key in ["authenticated", "ai_cleaning_completed"] else (None if key in ["username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "target_column"] else ("📊 Overview" if "nav" in key else []))
                         st.rerun()
