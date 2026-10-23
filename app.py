@@ -88,14 +88,18 @@ CUSTOM_CSS = """
   -webkit-font-smoothing: antialiased;
 }
 
-/* Header & Top Bar - Ensure comfortable top spacing so header never overlaps content */
-[data-testid="stHeader"] {
-  background: transparent !important;
-  z-index: 99 !important;
-}
+/* Hide Streamlit Chrome: Header, Menu, Toolbar, and Footer */
+#MainMenu {visibility: hidden;}
+header {visibility: hidden;}
+footer {visibility: hidden;}
+[data-testid="stHeader"] {visibility: hidden !important; display: none !important;}
+
+/* Hide Input Helper Instructions & Character Limit Counters */
+[data-testid="InputInstructions"] {display: none !important;}
+.stTextInput small {display: none !important;}
 
 .block-container {
-  padding-top: 5rem !important;
+  padding-top: 3.5rem !important;
   padding-bottom: 3.5rem !important;
   max-width: 1560px;
 }
@@ -1431,39 +1435,47 @@ def render_dataset_inspector(
 
 # ---------- Login and authentication screen ----------
 def render_auth() -> None:
-    # Scrubb AI display card: brought down below navigation bar, rounded rectangle, white background, uniform canvas
-    st.markdown("""
-    <div class="auth-hero">
-      <span class="hero-badge">DATA QUALITY &amp; EDA STUDIO</span>
-      <h1>🧹 Scrubb AI</h1>
-      <p>Turn messy spreadsheets and raw datasets into clear, analysis-ready data with intelligent profiling, automated missing-value cleaning, and deep visual EDA.</p>
-      <div class="hero-highlights">
-        <div class="hero-pill">✓ Deep Statistical Profiling</div>
-        <div class="hero-pill">✓ Smart Missing-Value Imputation</div>
-        <div class="hero-pill">✓ OpenRouter AI Quality Planner</div>
-        <div class="hero-pill">✓ Export Cleaned CSV / Excel &amp; Python Script</div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    left, center, right = st.columns([1, 1.25, 1])
+    left, center, right = st.columns([1, 1.2, 1])
     with center:
-        login_tab, signup_tab = st.tabs(["🔐 Sign in", "✨ Create account"])
+        st.markdown(
+            """
+            <div style="text-align: center; margin-bottom: 1.75rem;">
+                <h1 style="font-size: 2.1rem; font-weight: 800; margin-bottom: 0.25rem; letter-spacing: -0.03em;">🧹 Scrubb AI</h1>
+                <p style="color: var(--slate-600); font-size: 0.95rem; margin: 0;">Intelligent Data Profiling &amp; Cleaning Studio</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        tab_labels = ["🔐 Sign in", "✨ Create account"]
+        active_key = f"auth_tabs_{st.session_state.get('auth_tab_reset_id', 0)}"
+        try:
+            login_tab, signup_tab = st.tabs(tab_labels, key=active_key)
+        except TypeError:
+            login_tab, signup_tab = st.tabs(tab_labels)
+
         with login_tab:
+            if "auth_success_msg" in st.session_state:
+                st.success(st.session_state.pop("auth_success_msg"))
+
             with st.form("login_form", clear_on_submit=False):
                 st.markdown("##### Welcome back")
                 st.caption("Sign in to access your data workspace")
-                # Mod 1: Removed placeholder text from login inputs
-                username = st.text_input("Username", max_chars=32)
+                prefill_user = st.session_state.get("login_prefill_username", "")
+                username = st.text_input("Username", value=prefill_user, max_chars=32)
                 password = st.text_input("Password", type="password")
                 submitted = st.form_submit_button("Sign in to Workspace", use_container_width=True)
+
             if submitted:
                 if verify_user(username, password):
                     st.session_state.authenticated = True
                     st.session_state.username = username.strip()
+                    st.session_state.pop("login_prefill_username", None)
+                    st.session_state.pop("auth_success_msg", None)
                     st.rerun()
                 else:
                     st.error("Invalid credentials. Please verify your username and password.")
+
         with signup_tab:
             with st.form("signup_form", clear_on_submit=True):
                 st.markdown("##### New account")
@@ -1472,13 +1484,21 @@ def render_auth() -> None:
                 new_password = st.text_input("Create password", type="password")
                 confirm_password = st.text_input("Confirm password", type="password")
                 create = st.form_submit_button("Create Account", use_container_width=True)
+
             if create:
-                if new_password != confirm_password:
+                if not new_username.strip():
+                    st.error("Please enter a username.")
+                elif new_password != confirm_password:
                     st.error("Passwords do not match.")
                 else:
-                    ok, message = create_user(new_username, new_password)
-                    (st.success if ok else st.error)(message)
-        st.caption("🔒 Local account storage • Passwords salted and hashed with PBKDF2 • Source API key kept private")
+                    ok, message = create_user(new_username.strip(), new_password)
+                    if ok:
+                        st.session_state["login_prefill_username"] = new_username.strip()
+                        st.session_state["auth_success_msg"] = f"{message} Please enter your password to sign in."
+                        st.session_state["auth_tab_reset_id"] = st.session_state.get("auth_tab_reset_id", 0) + 1
+                        st.rerun()
+                    else:
+                        st.error(message)
 
 
 # ---------- Main Dashboard ----------
