@@ -41,7 +41,7 @@ st.set_page_config(
     page_title=APP_TITLE,
     page_icon="🧹",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 CUSTOM_CSS = """
@@ -49,42 +49,50 @@ CUSTOM_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --navy-950: #061320;
-  --navy-900: #0B192C;
-  --navy-800: #102A43;
-  --navy-700: #1A3E5C;
-  --teal-900: #053D42;
-  --teal-800: #085A61;
-  --teal-700: #0C757E;
-  --teal-600: #0F939D;
-  --teal-500: #14B8A6;
-  --teal-400: #2DD4BF;
-  --teal-100: #CCFBF1;
-  --teal-50:  #F0FDF4;
-  --cyan-600: #0284C7;
-  --cyan-500: #0EA5E9;
-  --cyan-100: #E0F2FE;
+  --blue-eclipse-base: #0F0E47;
+  --blue-eclipse-card: #272757;
+  --blue-eclipse-border: #505081;
+  --blue-eclipse-muted: #8686AC;
+  --blue-eclipse-accent: #6C6CD6;
+  --white: #FFFFFF;
+
+  --navy-950: #0F0E47;
+  --navy-900: #FFFFFF;
+  --navy-800: #272757;
+  --navy-700: #363673;
+  --teal-900: #1F1E5E;
+  --teal-800: #8686AC;
+  --teal-700: #505081;
+  --teal-600: #6C6CD6;
+  --teal-500: #8686AC;
+  --teal-400: #A8A8D0;
+  --teal-100: #272757;
+  --teal-50:  #1A1957;
+  --cyan-600: #6C6CD6;
+  --cyan-500: #8686AC;
+  --cyan-100: #272757;
   --red-600:  #E11D48;
   --red-700:  #BE123C;
-  --slate-50: #F4F8FA;
-  --slate-100: #EBF1F6;
-  --slate-200: #DCE5EE;
-  --slate-300: #CBD5E1;
-  --slate-500: #64748B;
-  --slate-600: #475569;
-  --slate-700: #334155;
-  --slate-800: #1E293B;
-  --slate-900: #0F172A;
+  --slate-50: #0F0E47;
+  --slate-100: #1F1E5E;
+  --slate-200: #505081;
+  --slate-300: #8686AC;
+  --slate-500: #8686AC;
+  --slate-600: #B0B0D0;
+  --slate-700: #D8D8F0;
+  --slate-800: #FFFFFF;
+  --slate-900: #FFFFFF;
   --white: #FFFFFF;
 }
 
-/* Global Font & Canvas */
+/* Global Font & Canvas - Blue Eclipse Palette */
 .stApp {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: var(--slate-800);
-  background: radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.04) 0%, transparent 40%),
-              radial-gradient(circle at 90% 90%, rgba(20, 184, 166, 0.05) 0%, transparent 40%),
-              var(--slate-50);
+  color: #FFFFFF;
+  background-color: #0F0E47 !important;
+  background: radial-gradient(circle at 10% 10%, rgba(80, 80, 129, 0.22) 0%, transparent 45%),
+              radial-gradient(circle at 90% 90%, rgba(39, 39, 87, 0.45) 0%, transparent 45%),
+              #0F0E47 !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -98,13 +106,22 @@ footer {visibility: hidden;}
 [data-testid="InputInstructions"] {display: none !important;}
 .stTextInput small {display: none !important;}
 
+/* Completely remove sidebar and toggle controls */
+[data-testid="stSidebar"],
+[data-testid="collapsedControl"],
+section[data-testid="stSidebar"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+}
+
 .block-container {
   padding-top: 3.5rem !important;
   padding-bottom: 3.5rem !important;
   max-width: 1560px;
 }
 
-/* Streamlit Material Icons font protection - Fix: prevent text strings from replacing icons */
+/* Streamlit Material Icons font protection */
 [data-testid="stIconMaterial"],
 .material-symbols-rounded,
 .material-symbols-outlined,
@@ -129,39 +146,32 @@ span[data-testid="stIconMaterial"] {
   font-feature-settings: 'liga' !important;
 }
 
-/* Clean up top-right header toolbar */
-[data-testid="stToolbar"] {
-  z-index: 100 !important;
-  right: 1.25rem !important;
-  top: 0.6rem !important;
-}
-
-/* Headings with high contrast */
+/* Headings with high contrast pure white */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Plus Jakarta Sans', sans-serif !important;
-  color: var(--navy-900) !important;
+  color: #FFFFFF !important;
   font-weight: 700;
   letter-spacing: -0.025em;
 }
 
 p, span, label {
-  color: var(--slate-800);
+  color: #E2E2F5;
 }
 
 .small-muted {
-  color: var(--slate-600) !important;
+  color: #8686AC !important;
 }
 
-/* Workspace Hero Banner */
+/* Workspace Hero Banner - Blue Eclipse High Contrast */
 .hero {
-  background: linear-gradient(135deg, #0B192C 0%, #102A43 45%, #085A61 80%, #0C757E 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #1C1B61 0%, #272757 50%, #363673 100%) !important;
+  color: #FFFFFF !important;
   padding: 1.8rem 2.2rem;
   border-radius: 20px;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(45, 212, 191, 0.22);
-  box-shadow: 0 14px 34px rgba(11, 25, 44, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  border: 1px solid #505081 !important;
+  box-shadow: 0 14px 34px rgba(15, 14, 71, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   position: relative;
   overflow: hidden;
 }
@@ -175,91 +185,29 @@ p, span, label {
 }
 
 .hero p {
-  color: #E0F2FE !important;
+  color: #D8D8F0 !important;
   margin: 0.5rem 0 0 0;
   font-size: 1.02rem;
   max-width: 860px;
   line-height: 1.5;
 }
 
-/* Auth Display Hero Card (Login Page - Rounded Rectangle, White Background for text, Uniform Canvas) */
-.auth-hero {
-  background: #FFFFFF !important;
-  color: var(--slate-800) !important;
-  padding: 2.2rem 2.4rem !important;
-  border-radius: 20px !important;
-  margin-top: 0.5rem !important;
-  margin-bottom: 2rem !important;
-  border: 1px solid var(--slate-200) !important;
-  box-shadow: 0 8px 30px rgba(11, 25, 44, 0.05) !important;
-  text-align: center;
-}
-
-.auth-hero .hero-badge {
-  display: inline-block;
-  background: var(--teal-100) !important;
-  color: var(--teal-900) !important;
-  border: 1px solid var(--teal-500) !important;
-  font-size: 0.76rem;
-  font-weight: 750;
-  letter-spacing: 0.08em;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  margin-bottom: 0.5rem;
-}
-
-.auth-hero h1 {
-  color: var(--navy-900) !important;
-  font-size: 2.3rem !important;
-  font-weight: 800 !important;
-  margin: 0.25rem 0 !important;
-  letter-spacing: -0.03em !important;
-}
-
-.auth-hero p {
-  color: var(--slate-600) !important;
-  font-size: 1.05rem !important;
-  max-width: 760px;
-  margin: 0.5rem auto 1.2rem auto !important;
-  line-height: 1.55;
-}
-
-.auth-hero .hero-highlights {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.8rem;
-}
-
-.auth-hero .hero-pill {
-  background: var(--slate-100) !important;
-  border: 1px solid var(--slate-200) !important;
-  color: var(--navy-800) !important;
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding: 0.32rem 0.85rem;
-  border-radius: 8px;
-}
-
 /* Metric Cards */
 .metric-card {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(12, 117, 126, 0.18);
-  border-top: 3.5px solid var(--teal-700);
+  background: #272757 !important;
+  border: 1px solid #505081 !important;
+  border-top: 3.5px solid #8686AC !important;
   border-radius: 16px;
   padding: 1.15rem 1.25rem;
-  box-shadow: 0 8px 24px rgba(11, 25, 44, 0.05);
+  box-shadow: 0 8px 24px rgba(15, 14, 71, 0.35);
   min-height: 118px;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .metric-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(11, 25, 44, 0.08);
-  border-color: rgba(12, 117, 126, 0.32);
+  box-shadow: 0 12px 28px rgba(15, 14, 71, 0.5);
+  border-color: #8686AC !important;
 }
 
 .metric-header {
@@ -273,7 +221,7 @@ p, span, label {
 }
 
 .metric-label {
-  color: var(--teal-800);
+  color: #8686AC !important;
   font-size: 0.82rem;
   font-weight: 750;
   text-transform: uppercase;
@@ -281,7 +229,7 @@ p, span, label {
 }
 
 .metric-value {
-  color: var(--navy-900);
+  color: #FFFFFF !important;
   font-size: 1.88rem;
   font-weight: 800;
   margin-top: 0.3rem;
@@ -289,26 +237,28 @@ p, span, label {
 }
 
 .metric-note {
-  color: var(--slate-600);
+  color: #D8D8F0 !important;
   font-size: 0.83rem;
   margin-top: 0.25rem;
   font-weight: 500;
 }
 
-/* Glass Panels & Containers */
+/* Panels & Containers */
 .panel {
-  background: #FFFFFF;
-  border: 1px solid var(--slate-200);
-  border-radius: 16px;
+  background: #272757 !important;
+  border: 1px solid #505081 !important;
+  color: #FFFFFF !important;
+  border-radius: 16px !important;
   padding: 1.25rem 1.4rem;
-  box-shadow: 0 6px 20px rgba(11, 25, 44, 0.04);
+  box-shadow: 0 6px 20px rgba(15, 14, 71, 0.3) !important;
 }
 
 .empty-state-panel {
   text-align: center;
   padding: 2.8rem 1.5rem;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
-  border: 1.5px dashed var(--slate-300);
+  background: #272757 !important;
+  border: 1.5px dashed #505081 !important;
+  border-radius: 16px !important;
   margin-top: 1rem;
 }
 
@@ -326,109 +276,146 @@ p, span, label {
 }
 
 .feature-pill {
-  background: var(--slate-100);
-  color: var(--navy-800);
-  border: 1px solid var(--slate-200);
+  background: #1C1B5E !important;
+  color: #E2E2F5 !important;
+  border: 1px solid #505081 !important;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
   font-size: 0.82rem;
   font-weight: 600;
 }
 
-/* Clean Form Styling */
+/* Forms */
 div[data-testid="stForm"] {
-  background: #FFFFFF !important;
-  border: 1px solid var(--slate-200) !important;
+  background: #272757 !important;
+  border: 1px solid #505081 !important;
   border-radius: 16px !important;
   padding: 1.5rem !important;
-  box-shadow: 0 6px 20px rgba(11, 25, 44, 0.04) !important;
+  box-shadow: 0 6px 20px rgba(15, 14, 71, 0.3) !important;
 }
 
-/* Top Horizontal Navigation Radio Buttons (Styled as Sleek Modern Pills) */
-div[data-testid="stRadio"]:has(> div[role="radiogroup"]) > div[role="radiogroup"] {
+/* Sticky Top Navigation Bar */
+.st-key-top_navbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  background: rgba(39, 39, 87, 0.98) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom: 1.5px solid #505081 !important;
+  border-radius: 0 0 16px 16px !important;
+  padding: 0.55rem 1.15rem !important;
+  margin-top: -3.5rem !important;
+  margin-bottom: 1.5rem !important;
+  box-shadow: 0 8px 30px rgba(15, 14, 71, 0.5) !important;
+}
+
+.top-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-left: 0.25rem;
+}
+
+.top-nav-brand .brand-icon {
+  font-size: 1.6rem;
+}
+
+.top-nav-brand .brand-title {
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.top-nav-user-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #1C1B5E;
+  border: 1px solid #505081;
+  border-radius: 10px;
+  padding: 0.35rem 0.75rem;
+}
+
+.top-nav-user-pill .user-avatar {
+  font-size: 1.15rem;
+}
+
+.top-nav-user-pill .user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-nav-user-pill .user-name {
+  color: #FFFFFF !important;
+  font-size: 0.88rem;
+  font-weight: 750;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.top-nav-user-pill .user-status {
+  color: #8686AC !important;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Horizontal Radio / Pill Options */
+div[data-testid="stRadio"] div[role="radiogroup"] {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
   gap: 10px !important;
-  margin-bottom: 1.25rem !important;
+  align-items: center !important;
 }
 
-div[data-testid="stRadio"]:has(> div[role="radiogroup"]) label {
-  background: #FFFFFF !important;
-  border: 1.5px solid var(--slate-200) !important;
+div[data-testid="stRadio"] div[role="radiogroup"] > label {
+  background: #272757 !important;
+  border: 1.5px solid #505081 !important;
   border-radius: 12px !important;
-  padding: 0.65rem 1.35rem !important;
+  padding: 0.55rem 1.15rem !important;
   cursor: pointer !important;
   transition: all 0.18s ease !important;
-  box-shadow: 0 2px 6px rgba(11, 25, 44, 0.03) !important;
+  box-shadow: 0 2px 6px rgba(15, 14, 71, 0.3) !important;
 }
 
-div[data-testid="stRadio"]:has(> div[role="radiogroup"]) label:hover {
-  border-color: var(--teal-600) !important;
+div[data-testid="stRadio"] div[role="radiogroup"] > label:hover {
+  border-color: #8686AC !important;
+  background: #363673 !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 16px rgba(12, 117, 126, 0.1) !important;
 }
 
-div[data-testid="stRadio"]:has(> div[role="radiogroup"]) label div:first-child {
+div[data-testid="stRadio"] div[role="radiogroup"] > label div:first-child {
   display: none !important;
 }
 
-div[data-testid="stRadio"]:has(> div[role="radiogroup"]) label p {
+div[data-testid="stRadio"] div[role="radiogroup"] > label p {
   font-weight: 700 !important;
-  font-size: 0.95rem !important;
-  color: var(--slate-800) !important;
+  font-size: 0.92rem !important;
+  color: #E2E2F5 !important;
   margin: 0 !important;
 }
 
-div[data-testid="stRadio"]:has(> div[role="radiogroup"]) label:has(input:checked) {
-  background: linear-gradient(135deg, #0C757E 0%, #0284C7 100%) !important;
-  border-color: transparent !important;
-  box-shadow: 0 6px 18px rgba(12, 117, 126, 0.28) !important;
+div[data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) {
+  background: linear-gradient(135deg, #505081 0%, #6C6CD6 100%) !important;
+  border-color: #8686AC !important;
+  box-shadow: 0 4px 14px rgba(80, 80, 129, 0.5) !important;
 }
 
-div[data-testid="stRadio"]:has(> div[role="radiogroup"]) label:has(input:checked) p {
+div[data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) p {
   color: #FFFFFF !important;
 }
 
-/* Sidebar Radio Navigation */
-[data-testid="stSidebar"] div[data-testid="stRadio"] label {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  padding: 0.6rem 0.85rem !important;
-  border-radius: 10px !important;
-  margin-bottom: 0.4rem !important;
-  transition: all 0.15s ease !important;
-  cursor: pointer !important;
-}
-
-[data-testid="stSidebar"] div[data-testid="stRadio"] label:hover {
-  background: rgba(20, 184, 166, 0.18) !important;
-  border-color: rgba(20, 184, 166, 0.4) !important;
-  transform: translateX(2px) !important;
-}
-
-[data-testid="stSidebar"] div[data-testid="stRadio"] label:has(input:checked) {
-  background: linear-gradient(135deg, rgba(12, 117, 126, 0.65) 0%, rgba(2, 132, 199, 0.65) 100%) !important;
-  border: 1px solid #14B8A6 !important;
-}
-
-[data-testid="stSidebar"] div[data-testid="stRadio"] label p {
-  color: #F1F5F9 !important;
-  font-weight: 650 !important;
-  font-size: 0.88rem !important;
-  margin: 0 !important;
-}
-
-[data-testid="stSidebar"] div[data-testid="stRadio"] label:has(input:checked) p {
-  color: #FFFFFF !important;
-  font-weight: 750 !important;
-}
-
-/* Auth Tabs */
+/* Tabs */
 div[data-testid="stTabs"] [data-baseweb="tab-list"] {
   gap: 8px;
   background: transparent;
-  border-bottom: 1.5px solid var(--slate-200);
+  border-bottom: 1.5px solid #505081;
   padding-bottom: 8px;
 }
 
@@ -437,23 +424,23 @@ div[data-testid="stTabs"] button[role="tab"] {
   font-weight: 700 !important;
   font-size: 0.95rem !important;
   padding: 0.65rem 1.4rem !important;
-  background: #FFFFFF !important;
-  border: 1.5px solid var(--slate-200) !important;
-  color: var(--slate-700) !important;
+  background: #272757 !important;
+  border: 1.5px solid #505081 !important;
+  color: #E2E2F5 !important;
   transition: all 0.18s ease !important;
 }
 
 div[data-testid="stTabs"] button[role="tab"]:hover {
-  border-color: var(--teal-600) !important;
-  color: var(--teal-700) !important;
+  border-color: #8686AC !important;
+  color: #FFFFFF !important;
   transform: translateY(-1px) !important;
 }
 
 div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
-  background: linear-gradient(135deg, #0C757E 0%, #0284C7 100%) !important;
+  background: linear-gradient(135deg, #505081 0%, #6C6CD6 100%) !important;
   color: #FFFFFF !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 4px 14px rgba(12, 117, 126, 0.25) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(80, 80, 129, 0.4) !important;
 }
 
 /* Metadata Strip & Badges */
@@ -465,16 +452,16 @@ div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   padding: 0.65rem 0.9rem;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid var(--slate-200);
+  background: #272757;
+  border: 1px solid #505081;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(11, 25, 44, 0.02);
+  box-shadow: 0 2px 8px rgba(15, 14, 71, 0.3);
 }
 
 .meta-pill {
-  background: var(--slate-100);
-  color: var(--slate-800);
-  border: 1px solid var(--slate-200);
+  background: #1C1B5E;
+  color: #E2E2F5;
+  border: 1px solid #505081;
   border-radius: 8px;
   padding: 0.3rem 0.65rem;
   font-size: 0.82rem;
@@ -482,51 +469,55 @@ div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
 }
 
 .meta-pill strong {
-  color: var(--navy-900);
+  color: #FFFFFF;
 }
 
 .status-pill-active {
-  background: var(--teal-100) !important;
-  color: var(--teal-900) !important;
-  border: 1px solid var(--teal-500) !important;
+  background: #1F3B38 !important;
+  color: #5EEAD4 !important;
+  border: 1px solid #14B8A6 !important;
   font-weight: 750 !important;
 }
 
 .status-pill-neutral {
-  background: var(--cyan-100) !important;
-  color: var(--navy-900) !important;
-  border: 1px solid var(--cyan-500) !important;
+  background: #1C1B5E !important;
+  color: #BAE6FD !important;
+  border: 1px solid #505081 !important;
   font-weight: 700 !important;
 }
 
 .view-status-banner {
-  background: linear-gradient(90deg, #F0F9FF 0%, #F8FAFC 100%);
-  border: 1px solid #BAE6FD;
-  border-left: 4px solid var(--cyan-600);
+  background: #272757;
+  border: 1px solid #505081;
+  border-left: 4px solid #8686AC;
   padding: 0.6rem 0.95rem;
   border-radius: 10px;
   margin: 0.75rem 0 0.85rem 0;
   font-size: 0.88rem;
-  color: #0369A1;
+  color: #FFFFFF;
   font-weight: 600;
 }
 
 /* File Uploader */
 div[data-testid="stFileUploader"] {
-  background: linear-gradient(135deg, rgba(204, 251, 241, 0.45) 0%, rgba(224, 242, 254, 0.45) 100%) !important;
-  border: 2px dashed var(--teal-700) !important;
+  background: #272757 !important;
+  border: 2px dashed #505081 !important;
   padding: 1.25rem !important;
   border-radius: 18px !important;
-  box-shadow: 0 6px 20px rgba(12, 117, 126, 0.05);
+  box-shadow: 0 6px 20px rgba(15, 14, 71, 0.3);
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-div[data-testid="stFileUploader"]:hover {
-  border-color: var(--teal-600) !important;
-  background: linear-gradient(135deg, rgba(204, 251, 241, 0.6) 0%, rgba(224, 242, 254, 0.6) 100%) !important;
+div[data-testid="stFileUploader"] * {
+  color: #D8D8F0 !important;
 }
 
-/* General Buttons - Clear text visibility in all states */
+div[data-testid="stFileUploader"]:hover {
+  border-color: #8686AC !important;
+  background: #303066 !important;
+}
+
+/* General Buttons - Blue Eclipse Theme & High Contrast */
 .stButton button, .stDownloadButton button {
   border-radius: 11px !important;
   font-weight: 700 !important;
@@ -535,44 +526,62 @@ div[data-testid="stFileUploader"]:hover {
   padding: 0.55rem 1.2rem !important;
   transition: all 0.18s ease !important;
   cursor: pointer !important;
-  border: 1.5px solid var(--slate-300) !important;
-  background: #FFFFFF !important;
-  color: var(--navy-900) !important;
-  box-shadow: 0 2px 6px rgba(11, 25, 44, 0.04) !important;
+  border: 1.5px solid #505081 !important;
+  background: #272757 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 6px rgba(15, 14, 71, 0.3) !important;
+}
+
+.stButton button *, .stButton button p, .stButton button span,
+.stDownloadButton button *, .stDownloadButton button p, .stDownloadButton button span {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
 }
 
 .stButton button:hover, .stDownloadButton button:hover {
-  border-color: var(--teal-700) !important;
-  color: var(--teal-800) !important;
+  border-color: #8686AC !important;
+  background: #363673 !important;
+  color: #FFFFFF !important;
   transform: translateY(-1.5px) !important;
-  box-shadow: 0 6px 16px rgba(12, 117, 126, 0.12) !important;
+  box-shadow: 0 6px 16px rgba(15, 14, 71, 0.45) !important;
 }
 
+/* Primary Action Buttons (AI Analyst, Clean Automatically, etc.) */
 .stButton button[kind="primary"], .stDownloadButton button[kind="primary"] {
-  background: linear-gradient(135deg, #0C757E 0%, #085A61 50%, #0284C7 100%) !important;
+  background: linear-gradient(135deg, #505081 0%, #6C6CD6 100%) !important;
   color: #FFFFFF !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 6px 18px rgba(12, 117, 126, 0.28) !important;
+  fill: #FFFFFF !important;
+  border: 1.5px solid #8686AC !important;
+  box-shadow: 0 4px 16px rgba(108, 108, 214, 0.4) !important;
+}
+
+.stButton button[kind="primary"] *, .stButton button[kind="primary"] p, .stButton button[kind="primary"] span,
+.stDownloadButton button[kind="primary"] *, .stDownloadButton button[kind="primary"] p, .stDownloadButton button[kind="primary"] span {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
 }
 
 .stButton button[kind="primary"]:hover, .stDownloadButton button[kind="primary"]:hover {
-  background: linear-gradient(135deg, #0F939D 0%, #0C757E 50%, #0369A1 100%) !important;
+  background: linear-gradient(135deg, #6C6CD6 0%, #7D7DE8 100%) !important;
   color: #FFFFFF !important;
-  box-shadow: 0 8px 22px rgba(12, 117, 126, 0.38) !important;
+  box-shadow: 0 8px 22px rgba(108, 108, 214, 0.6) !important;
 }
 
-/* Disabled buttons - Ensure text is clearly visible and legible, not faded out */
+/* Disabled buttons */
 .stButton button:disabled, .stDownloadButton button:disabled {
-  opacity: 0.65 !important;
+  opacity: 0.55 !important;
   cursor: not-allowed !important;
   transform: none !important;
   box-shadow: none !important;
-  background: #F1F5F9 !important;
-  border: 1.5px solid #CBD5E1 !important;
-  color: #475569 !important;
+  background: #1C1B5E !important;
+  border: 1.5px solid #505081 !important;
+  color: #8686AC !important;
+}
+.stButton button:disabled *, .stDownloadButton button:disabled * {
+  color: #8686AC !important;
 }
 
-/* Submit Button - Completely Solid Red & 100% Readable */
+/* Submit Button - Solid Red & High Contrast */
 div[data-testid="stFormSubmitButton"] button {
   background: var(--red-600) !important;
   background-color: var(--red-600) !important;
@@ -596,211 +605,59 @@ div[data-testid="stFormSubmitButton"] button:hover {
   box-shadow: 0 8px 22px rgba(225, 29, 72, 0.38) !important;
 }
 
-div[data-testid="stFormSubmitButton"] button:focus {
-  outline: 2px solid var(--red-600) !important;
-  outline-offset: 2px !important;
-}
-
-/* Form Inputs & Selects - Crisp Text Visibility */
+/* Form Inputs & Selects */
 div[data-baseweb="input"], div[data-baseweb="select"] {
   border-radius: 10px !important;
-  border-color: var(--slate-300) !important;
-  background-color: #FFFFFF !important;
+  border-color: #505081 !important;
+  background-color: #272757 !important;
 }
 
 div[data-baseweb="input"] input, div[data-baseweb="select"] * {
-  color: var(--slate-900) !important;
+  color: #FFFFFF !important;
   font-weight: 550 !important;
 }
 
 div[data-baseweb="input"]:focus-within, div[data-baseweb="select"]:focus-within {
-  border-color: var(--teal-700) !important;
-  box-shadow: 0 0 0 3px rgba(12, 117, 126, 0.15) !important;
+  border-color: #8686AC !important;
+  box-shadow: 0 0 0 3px rgba(108, 108, 214, 0.25) !important;
+}
+
+div[data-baseweb="popover"] ul {
+  background-color: #272757 !important;
+  border: 1px solid #505081 !important;
 }
 
 div[data-baseweb="popover"] ul li {
-  color: var(--slate-900) !important;
-  background-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+  background-color: #272757 !important;
 }
 
 div[data-baseweb="popover"] ul li:hover {
-  background-color: #F1F5F9 !important;
-  color: var(--teal-700) !important;
+  background-color: #383870 !important;
+  color: #FFFFFF !important;
 }
 
 /* Tables & Dataframes */
 div[data-testid="stDataFrame"] {
-  background: #FFFFFF;
-  border: 1px solid var(--slate-200);
+  background: #272757 !important;
+  border: 1px solid #505081 !important;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(11, 25, 44, 0.03);
+  box-shadow: 0 4px 14px rgba(15, 14, 71, 0.3);
 }
 
 /* Checkbox & Radio Labels */
 div[data-testid="stCheckbox"] label span, div[data-testid="stRadio"] label span {
-  color: var(--slate-800) !important;
+  color: #FFFFFF !important;
   font-weight: 600;
-}
-
-/* Sidebar Styling */
-[data-testid="stSidebar"] {
-  background: linear-gradient(180deg, #0B192C 0%, #0F2A42 50%, #084C53 100%) !important;
-  border-right: 1px solid rgba(45, 212, 191, 0.16) !important;
-  box-shadow: 4px 0 24px rgba(11, 25, 44, 0.15) !important;
-}
-
-[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1,
-[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2,
-[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3,
-[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
-[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] span,
-[data-testid="stSidebar"] label {
-  color: #F1F5F9 !important;
-}
-
-[data-testid="stSidebar"] .stCaption {
-  color: #94A3B8 !important;
-}
-
-.sidebar-brand-box {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 0.4rem 1.1rem 0.4rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  margin-bottom: 1.1rem;
-}
-
-.sidebar-brand-icon {
-  font-size: 2rem;
-  background: rgba(20, 184, 166, 0.18);
-  border: 1px solid rgba(20, 184, 166, 0.35);
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-}
-
-.sidebar-brand-title {
-  color: #FFFFFF !important;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.sidebar-brand-sub {
-  color: #5EEAD4 !important;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.sidebar-section-label {
-  color: #94A3B8 !important;
-  font-size: 0.74rem;
-  font-weight: 750;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-top: 1rem;
-  margin-bottom: 0.45rem;
-}
-
-.sidebar-dataset-card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(20, 184, 166, 0.28);
-  border-radius: 12px;
-  padding: 0.85rem;
-  margin-bottom: 0.8rem;
-  backdrop-filter: blur(8px);
-}
-
-.sidebar-filename {
-  color: #FFFFFF !important;
-  font-weight: 700;
-  font-size: 0.88rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sidebar-stats {
-  color: #CBD5E1 !important;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-}
-
-.sidebar-tag {
-  display: inline-block;
-  margin-top: 0.45rem;
-  font-size: 0.72rem;
-  font-weight: 750;
-  padding: 0.18rem 0.55rem;
-  border-radius: 6px;
-}
-
-.tag-cleaned {
-  background: rgba(20, 184, 166, 0.28);
-  color: #5EEAD4 !important;
-  border: 1px solid rgba(20, 184, 166, 0.45);
-}
-
-.tag-raw {
-  background: rgba(14, 165, 233, 0.25);
-  color: #BAE6FD !important;
-  border: 1px solid rgba(14, 165, 233, 0.4);
-}
-
-.sidebar-user-pill {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  padding: 0.6rem 0.75rem;
-  margin-bottom: 0.85rem;
-}
-
-.user-avatar {
-  font-size: 1.25rem;
-}
-
-.user-name {
-  color: #FFFFFF !important;
-  font-weight: 700;
-  font-size: 0.88rem;
-}
-
-.user-role {
-  color: #94A3B8 !important;
-  font-size: 0.76rem;
-}
-
-/* Sidebar Buttons */
-[data-testid="stSidebar"] .stButton button {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #FFFFFF !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: none !important;
-}
-
-[data-testid="stSidebar"] .stButton button:hover {
-  background: rgba(239, 68, 68, 0.25) !important;
-  border-color: rgba(239, 68, 68, 0.6) !important;
-  color: #FFFFFF !important;
 }
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .hero, .auth-hero {
+  .hero {
     padding: 1.5rem 1.4rem !important;
   }
-  .hero h1, .auth-hero h1 {
+  .hero h1 {
     font-size: 1.75rem !important;
   }
   .metric-value {
@@ -894,8 +751,7 @@ for key, default in {
     "target_column": "(Not specified)",
     "ai_cleaning_completed": False,
     "active_nav": "📊 Overview",
-    "sidebar_nav_key": "📊 Overview",
-    "main_nav_key": "📊 Overview",
+    "top_nav_key": "📊 Overview",
 }.items():
     if key not in st.session_state:
         st.session_state[key] = default
@@ -1245,7 +1101,7 @@ def render_feature_chart(df: pd.DataFrame, column: str, chart_type: str = "Auto"
     if non_null.empty:
         st.info("No non-missing values are available for this chart.")
         return
-    color_seq = ["#0C757E", "#0284C7", "#102A43", "#14B8A6", "#38BDF8", "#64748B"]
+    color_seq = ["#6C6CD6", "#8686AC", "#505081", "#A8A8D0", "#38BDF8", "#B0B0D0"]
     if pd.api.types.is_numeric_dtype(series):
         if chart_type == "Box plot":
             fig = px.box(df, y=column, title=f"{column} — Box Plot", points="outliers", color_discrete_sequence=color_seq)
@@ -1261,9 +1117,11 @@ def render_feature_chart(df: pd.DataFrame, column: str, chart_type: str = "Auto"
     fig.update_layout(
         margin=dict(l=10, r=10, t=50, b=10),
         height=350,
-        template="plotly_white",
-        font=dict(family="Plus Jakarta Sans, sans-serif", color="#1E293B"),
-        title_font=dict(size=14, color="#0B192C", family="Plus Jakarta Sans, sans-serif")
+        template="plotly_dark",
+        paper_bgcolor="#272757",
+        plot_bgcolor="#272757",
+        font=dict(family="Plus Jakarta Sans, sans-serif", color="#FFFFFF"),
+        title_font=dict(size=14, color="#FFFFFF", family="Plus Jakarta Sans, sans-serif")
     )
     st.plotly_chart(fig, use_container_width=True, key=key)
 
@@ -1513,78 +1371,57 @@ def render_dashboard() -> None:
     # Initialize navigation state
     if "active_nav" not in st.session_state:
         st.session_state["active_nav"] = NAV_SECTIONS[0]
-    if "sidebar_nav_key" not in st.session_state:
-        st.session_state["sidebar_nav_key"] = st.session_state["active_nav"]
-    if "main_nav_key" not in st.session_state:
-        st.session_state["main_nav_key"] = st.session_state["active_nav"]
+    if "top_nav_key" not in st.session_state or st.session_state["top_nav_key"] not in NAV_SECTIONS:
+        st.session_state["top_nav_key"] = st.session_state["active_nav"]
 
-    def _sync_from_sidebar():
-        st.session_state["active_nav"] = st.session_state["sidebar_nav_key"]
-        st.session_state["main_nav_key"] = st.session_state["sidebar_nav_key"]
+    def _sync_nav():
+        st.session_state["active_nav"] = st.session_state["top_nav_key"]
 
-    def _sync_from_main():
-        st.session_state["active_nav"] = st.session_state["main_nav_key"]
-        st.session_state["sidebar_nav_key"] = st.session_state["main_nav_key"]
+    # ---------- Sticky Top Navigation Bar ----------
+    with st.container(key="top_navbar"):
+        col_brand, col_nav, col_user, col_logout = st.columns([1.5, 4.3, 1.8, 1.1], vertical_alignment="center")
 
-    # --- Collapsible Sidebar ---
-    with st.sidebar:
-        st.markdown("""
-        <div class="sidebar-brand-box">
-          <div class="sidebar-brand-icon">🧹</div>
-          <div class="sidebar-brand-text">
-            <div class="sidebar-brand-title">Scrubb AI</div>
-            <div class="sidebar-brand-sub">Data Quality &amp; EDA</div>
-          </div>
-        </div>
-        """, unsafe_allow_html=True)
+        with col_brand:
+            st.markdown(
+                """
+                <div class="top-nav-brand">
+                    <span class="brand-icon">🧹</span>
+                    <span class="brand-title">Scrubb AI</span>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
-        st.markdown('<div class="sidebar-section-label">WORKSPACE NAVIGATION</div>', unsafe_allow_html=True)
-        st.sidebar.radio(
-            "Sidebar Navigation Menu",
-            options=NAV_SECTIONS,
-            key="sidebar_nav_key",
-            on_change=_sync_from_sidebar,
-            label_visibility="collapsed",
-        )
+        with col_nav:
+            st.radio(
+                "Workspace Navigation",
+                options=NAV_SECTIONS,
+                key="top_nav_key",
+                on_change=_sync_nav,
+                horizontal=True,
+                label_visibility="collapsed",
+            )
 
-        # Active Dataset status card
-        if st.session_state.raw_df is not None:
-            st.markdown("---")
-            st.markdown('<div class="sidebar-section-label">ACTIVE DATASET</div>', unsafe_allow_html=True)
-            clean_df_ref = st.session_state.clean_df
-            is_cleaned = st.session_state.get("ai_cleaning_completed", False)
-            st.markdown(f"""
-            <div class="sidebar-dataset-card">
-              <div class="sidebar-filename">📄 {st.session_state.file_name}</div>
-              <div class="sidebar-stats">
-                <span><strong>{len(clean_df_ref):,}</strong> rows</span> · 
-                <span><strong>{len(clean_df_ref.columns):,}</strong> cols</span>
-              </div>
-              <div class="sidebar-tag {'tag-cleaned' if is_cleaned else 'tag-raw'}">
-                {'✨ Cleaned' if is_cleaned else '📁 Original'}
-              </div>
-            </div>
-            """, unsafe_allow_html=True)
+        with col_user:
+            username_display = st.session_state.get("username", "User") or "User"
+            st.markdown(
+                f"""
+                <div class="top-nav-user-pill">
+                    <span class="user-avatar">👤</span>
+                    <div class="user-meta">
+                        <span class="user-name">{username_display}</span>
+                        <span class="user-status">Active Session</span>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
-        # User and Session profile
-        st.markdown("---")
-        st.markdown('<div class="sidebar-section-label">ACCOUNT &amp; PRIVACY</div>', unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class="sidebar-user-pill">
-          <div class="user-avatar">👤</div>
-          <div class="user-info">
-            <div class="user-name">{st.session_state.username}</div>
-            <div class="user-role">Active Session</div>
-          </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.caption("AI recommendations send aggregate column statistics—not raw dataset rows—to OpenRouter. Avoid sending confidential metadata unless approved.")
-
-        if st.button("🚪 Sign out", use_container_width=True, key="sign_out_button"):
-            for key in ["authenticated", "username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "clean_log", "target_column", "ai_cleaning_completed", "active_nav", "sidebar_nav_key", "main_nav_key"]:
-                st.session_state[key] = False if key in ["authenticated", "ai_cleaning_completed"] else (None if key in ["username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "target_column"] else ("📊 Overview" if "nav" in key else []))
-            st.rerun()
+        with col_logout:
+            if st.button("🚪 Sign out", use_container_width=True, key="top_sign_out_button"):
+                for key in ["authenticated", "username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "clean_log", "target_column", "ai_cleaning_completed", "active_nav", "top_nav_key"]:
+                    st.session_state[key] = False if key in ["authenticated", "ai_cleaning_completed"] else (None if key in ["username", "raw_df", "clean_df", "file_name", "ai_profile", "ai_plan", "target_column"] else ("📊 Overview" if "nav" in key else []))
+                st.rerun()
 
     # --- Main Workspace Area ---
     st.markdown("""
@@ -1641,16 +1478,6 @@ def render_dashboard() -> None:
 
     st.caption(f"Active file: **{st.session_state.file_name}** · Session data is held in memory until you sign out or replace the file.")
 
-    # Mod 3: Persistent Horizontal Navigation Bar (Retains corresponding page/feature on any interaction)
-    st.radio(
-        "Workspace Navigation",
-        options=NAV_SECTIONS,
-        key="main_nav_key",
-        on_change=_sync_from_main,
-        horizontal=True,
-        label_visibility="collapsed",
-    )
-
     current_section = st.session_state["active_nav"]
 
     # ---------------- TAB 1: OVERVIEW ----------------
@@ -1686,13 +1513,15 @@ def render_dashboard() -> None:
                 x="Column",
                 y="Missing Count",
                 title="Missing Value Distribution",
-                color_discrete_sequence=["#0C757E"],
+                color_discrete_sequence=["#6C6CD6"],
             )
             fig_miss.update_layout(
                 margin=dict(l=10, r=10, t=40, b=10),
                 height=300,
-                template="plotly_white",
-                font=dict(family="Plus Jakarta Sans, sans-serif", color="#1E293B"),
+                template="plotly_dark",
+                paper_bgcolor="#272757",
+                plot_bgcolor="#272757",
+                font=dict(family="Plus Jakarta Sans, sans-serif", color="#FFFFFF"),
             )
             st.plotly_chart(fig_miss, use_container_width=True)
 
@@ -1730,13 +1559,16 @@ def render_dashboard() -> None:
                     corr_matrix,
                     text_auto=True,
                     aspect="auto",
-                    color_continuous_scale=["#0B192C", "#0C757E", "#2DD4BF"],
+                    color_continuous_scale=["#0F0E47", "#505081", "#8686AC", "#FFFFFF"],
                     title="Correlation Heatmap (Numeric Features)",
                 )
                 fig_corr.update_layout(
                     margin=dict(l=10, r=10, t=40, b=10),
                     height=380,
-                    font=dict(family="Plus Jakarta Sans, sans-serif", color="#1E293B"),
+                    template="plotly_dark",
+                    paper_bgcolor="#272757",
+                    plot_bgcolor="#272757",
+                    font=dict(family="Plus Jakarta Sans, sans-serif", color="#FFFFFF"),
                 )
                 st.plotly_chart(fig_corr, use_container_width=True)
             else:
@@ -1915,7 +1747,7 @@ def render_dashboard() -> None:
         c_exp1, c_exp2 = st.columns([1.5, 2.5])
         with c_exp1:
             st.markdown("#### 1. Download Dataset")
-            fmt = st.radio("Choose Dataset Format", ["CSV (.csv)", "Excel (.xlsx)"], horizontal=True)
+            fmt = st.radio("Choose Dataset Format", ["CSV (.csv)", "Excel (.xlsx)"], horizontal=True, label_visibility="collapsed")
             if "CSV" in fmt:
                 data_bytes, mime, filename = df_to_csv_bytes(clean_df), "text/csv", "scrubb_cleaned.csv"
             else:
